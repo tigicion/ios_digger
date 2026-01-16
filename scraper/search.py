@@ -1,4 +1,6 @@
 """App Store search functionality."""
+import asyncio
+
 import httpx
 from urllib.parse import urlencode
 
@@ -45,8 +47,6 @@ class AppSearcher:
         self, keyword: str, regions: list[str], limit: int = 10
     ) -> dict[str, list[App]]:
         """Search apps by keyword across multiple regions."""
-        import asyncio
-
         async def search_region(region: str) -> tuple[str, list[App]]:
             apps = await self.search_by_keyword(keyword, region, limit)
             return region, apps

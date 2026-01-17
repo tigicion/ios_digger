@@ -1,0 +1,35 @@
+{% extends 'report_standard.html' %}
+
+{% block content %}
+{{ super() }}
+
+<div class="page-break"></div>
+
+<h2>产品建议</h2>
+
+<h3>优先修复</h3>
+<p>基于痛点严重程度和频率，建议优先处理以下问题：</p>
+{% for insight in pain_points[:3] if insight.severity == 'high' %}
+<div class="insight-card high">
+    <div class="insight-title">{{ loop.index }}. {{ insight.summary }}</div>
+    <p>建议：针对此问题进行专项修复，并在更新日志中说明。</p>
+</div>
+{% endfor %}
+
+<h3>功能增强</h3>
+<p>用户明确表达的需求，建议纳入产品路线图：</p>
+{% for insight in user_needs[:5] %}
+<div class="insight-card {{ insight.severity }}">
+    <div class="insight-title">{{ loop.index }}. {{ insight.summary }}</div>
+</div>
+{% endfor %}
+
+<h3>保持优势</h3>
+<p>用户好评的亮点，建议继续保持和强化：</p>
+{% for insight in positive_feedback[:3] %}
+<div class="insight-card low">
+    <div class="insight-title">{{ loop.index }}. {{ insight.summary }}</div>
+</div>
+{% endfor %}
+
+{% endblock %}

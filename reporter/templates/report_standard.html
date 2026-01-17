@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="cover">
+    <h1>{{ title }}</h1>
+    <div class="meta">
+        <p>分析日期：{{ date }}</p>
+        <p>覆盖地区：{{ regions }}</p>
+        <p>评论总数：{{ total_reviews }}</p>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>概览</h2>
+<div class="summary-box">
+    <div class="stat">
+        <div class="stat-value">{{ total_reviews }}</div>
+        <div class="stat-label">评论总数</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">{{ "%.1f"|format(avg_rating) }}</div>
+        <div class="stat-label">平均评分</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">{{ pain_points|length }}</div>
+        <div class="stat-label">发现痛点</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">{{ user_needs|length }}</div>
+        <div class="stat-label">用户需求</div>
+    </div>
+</div>
+
+<h3>评分分布</h3>
+<table class="region-table">
+    <tr>
+        <th>评分</th>
+        <th>数量</th>
+        <th>占比</th>
+    </tr>
+    {% for rating, count in rating_distribution.items() %}
+    <tr>
+        <td>{{ rating }} 星</td>
+        <td>{{ count }}</td>
+        <td>{{ "%.1f%%"|format(count / total_reviews * 100 if total_reviews > 0 else 0) }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="page-break"></div>
+
+<h2>痛点排名</h2>
+{% for insight in pain_points %}
+<div class="insight-card {{ insight.severity }}">
+    <div class="insight-title">
+        {{ loop.index }}. {{ insight.summary }}
+        <span class="severity-tag {{ insight.severity }}">{{ insight.severity }}</span>
+    </div>
+    {% for quote in insight.sample_reviews[:2] %}
+    <div class="insight-quote">"{{ quote }}"</div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<div class="page-break"></div>
+
+<h2>好评亮点</h2>
+{% for insight in positive_feedback %}
+<div class="insight-card low">
+    <div class="insight-title">{{ loop.index }}. {{ insight.summary }}</div>
+    {% for quote in insight.sample_reviews[:2] %}
+    <div class="insight-quote">"{{ quote }}"</div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<h2>用户需求洞察</h2>
+{% for insight in user_needs %}
+<div class="insight-card {{ insight.severity }}">
+    <div class="insight-title">
+        {{ loop.index }}. {{ insight.summary }}
+        <span class="severity-tag {{ insight.severity }}">{{ insight.severity }}</span>
+    </div>
+    {% for quote in insight.sample_reviews[:2] %}
+    <div class="insight-quote">"{{ quote }}"</div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+{% if regional_diff %}
+<div class="page-break"></div>
+
+<h2>地区差异分析</h2>
+<table class="region-table">
+    <tr>
+        <th>地区</th>
+        <th>评论数</th>
+        <th>平均评分</th>
+        <th>主要痛点</th>
+        <th>主要好评</th>
+    </tr>
+    {% for region, data in regional_diff.items() %}
+    <tr>
+        <td>{{ region_names.get(region, region) }}</td>
+        <td>{{ data.total_reviews }}</td>
+        <td>{{ "%.1f"|format(data.avg_rating) }}</td>
+        <td>{{ data.top_pain_point or '-' }}</td>
+        <td>{{ data.top_positive or '-' }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="cover">
+    <h1>{{ title }}</h1>
+    <div class="meta">
+        <p>分析日期：{{ date }}</p>
+        <p>覆盖地区：{{ regions }}</p>
+        <p>评论总数：{{ total_reviews }}</p>
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>痛点排名</h2>
+{% for insight in pain_points[:5] %}
+<div class="insight-card {{ insight.severity }}">
+    <div class="insight-title">
+        {{ loop.index }}. {{ insight.summary }}
+        <span class="severity-tag {{ insight.severity }}">{{ insight.severity }}</span>
+    </div>
+    {% if insight.sample_reviews %}
+    <div class="insight-quote">"{{ insight.sample_reviews[0] }}"</div>
+    {% endif %}
+</div>
+{% endfor %}
+
+<h2>好评亮点</h2>
+{% for insight in positive_feedback[:3] %}
+<div class="insight-card low">
+    <div class="insight-title">{{ loop.index }}. {{ insight.summary }}</div>
+    {% if insight.sample_reviews %}
+    <div class="insight-quote">"{{ insight.sample_reviews[0] }}"</div>
+    {% endif %}
+</div>
+{% endfor %}
+
+<h2>用户需求洞察</h2>
+{% for insight in user_needs[:5] %}
+<div class="insight-card {{ insight.severity }}">
+    <div class="insight-title">
+        {{ loop.index }}. {{ insight.summary }}
+        <span class="severity-tag {{ insight.severity }}">{{ insight.severity }}</span>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

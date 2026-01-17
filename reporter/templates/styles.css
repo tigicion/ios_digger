@@ -1,0 +1,150 @@
+@page {
+    size: A4;
+    margin: 2cm;
+}
+
+body {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #333;
+}
+
+h1 {
+    font-size: 24pt;
+    color: #1a1a1a;
+    border-bottom: 2px solid #007AFF;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 16pt;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 13pt;
+    color: #555;
+    margin-top: 20px;
+}
+
+.cover {
+    text-align: center;
+    padding-top: 200px;
+}
+
+.cover h1 {
+    font-size: 32pt;
+    border: none;
+}
+
+.cover .meta {
+    font-size: 12pt;
+    color: #666;
+    margin-top: 50px;
+}
+
+.summary-box {
+    background: #f5f5f7;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.summary-box .stat {
+    display: inline-block;
+    margin-right: 40px;
+}
+
+.summary-box .stat-value {
+    font-size: 24pt;
+    font-weight: bold;
+    color: #007AFF;
+}
+
+.summary-box .stat-label {
+    font-size: 10pt;
+    color: #666;
+}
+
+.insight-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.insight-card.high {
+    border-left: 4px solid #FF3B30;
+}
+
+.insight-card.medium {
+    border-left: 4px solid #FF9500;
+}
+
+.insight-card.low {
+    border-left: 4px solid #34C759;
+}
+
+.insight-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.insight-quote {
+    font-style: italic;
+    color: #666;
+    font-size: 10pt;
+    background: #f9f9f9;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+.severity-tag {
+    display: inline-block;
+    font-size: 9pt;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.severity-tag.high {
+    background: #FFEBEE;
+    color: #FF3B30;
+}
+
+.severity-tag.medium {
+    background: #FFF3E0;
+    color: #FF9500;
+}
+
+.severity-tag.low {
+    background: #E8F5E9;
+    color: #34C759;
+}
+
+.region-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.region-table th,
+.region-table td {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: left;
+}
+
+.region-table th {
+    background: #f5f5f7;
+}
+
+.page-break {
+    page-break-after: always;
+}
